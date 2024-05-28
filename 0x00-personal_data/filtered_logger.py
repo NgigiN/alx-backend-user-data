@@ -4,7 +4,8 @@ from typing import List
 import re
 
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """
       Arguments:
         fields: a list of strings representing all fields to obfuscate
@@ -15,4 +16,5 @@ def filter_datum(fields: List[str], redaction: str, message: str, separator: str
         the log message obuscated
     """
     pattern = f'({"|".join(map(re.escape, fields))})=.*?{re.escape(separator)}'
-    return re.sub(pattern, lambda m: f'{m.group(1)}={redaction}{separator}', message)
+    return re.sub(pattern,
+                  lambda m: f'{m.group(1)}={redaction}{separator}', message)
