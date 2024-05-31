@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """ Module that obuscates a log message"""
+from mysql.connector import connection
+import mysql.connector
 from typing import List
 import re
 import logging
+import os
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -57,3 +60,22 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
+
+def get_db() -> connection.MYSQLConnection:
+    """REturns a connector to the database"""
+    username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    password = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    database = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    if not database:
+        raise ValueError(
+            "Database name must be set in PERSONAL_DATA_DB_NAME environment variable")
+
+    return mysql.connector.connect(
+        user=username,
+        password=password,
+        host=host,
+        database=database
+    )
