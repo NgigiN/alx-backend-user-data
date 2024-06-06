@@ -12,11 +12,9 @@ class Auth():
     """Method for basic authentication"""
     return False
 
-
   def authorization_header(self, request=None) -> str:
     """Method handling the authorization header"""
     return None
-
 
   def current_user(self, request=None) -> TypeVar('User'):
     """Method for handling users
