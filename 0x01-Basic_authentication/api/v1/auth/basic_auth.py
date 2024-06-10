@@ -8,16 +8,19 @@ import base64
 class BasicAuth(Auth):
     """Basic Auth"""
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """Method that returns the Base64 part of the auth
         header"""
         if authorization_header is None:
             return None
-        if not isinstance(authorization_header, str) or not authorization_header.startswith("Basic "):
+        if not isinstance(authorization_header,
+                          str) or not authorization_header.startswith("Basic "):
             return None
         return authorization_header[len("Basic "):]
 
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str) -> str:
         """Returns the decoded value of a Base64 string"""
         if base64_authorization_header is None:
             return None
