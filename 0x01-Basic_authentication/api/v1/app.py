@@ -38,7 +38,7 @@ def forbidden(error):
 
 
 @app.before_request
-def request_validation(auth):
+def request_validation():
     """Auth values"""
     if auth is None:
         pass
